@@ -6,7 +6,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-TELEGRAM_TOKEN =  "8006638684:AAGaUd7joKAd-41O6VVdcYXk2L46CpYjdqA"
+TELEGRAM_TOKEN = "8006638684:AAGaUd7joKAd-41O6VVdcYXk2L46CpYjdqA"
 MINIMAX_API_KEY = "sk-api-HIaAqcunFejbtMJNPIvl-TumSpZSlp4-usCZe-Mk6ls-fmEe8b6pJbubotbZOlhzbSppUNhXuSso36Oq-5IRGadX-XNugGxmZ5KCh4rCoww0u88ZCQIsJzA"
 MINIMAX_API_URL = "https://api.minimax.io/v1/text/chatcompletion_v2"
 
@@ -17,38 +17,25 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "ဤ Bot သည် MiniMax AI နှင့်ချိတ်ဆက်ထားသည်။\n"
-        "/start - Bot စတင်မည်\n"
-        "/help - ဤမက်ဆိုင်ချက်"
-    )
+    await update.message.reply_text("/start - Bot စတင်မည်\n/help - ဤမက်ဆိုင်ချက်")
 
 async def chat_with_minimax(user_message: str) -> str:
     headers = {
         "Authorization": f"Bearer {MINIMAX_API_KEY}",
         "Content-Type": "application/json"
     }
-
     data = {
         "model": "M2-her",
-        "messages": [
-            {"role": "user", "content": user_message}
-        ]
+        "messages": [{"role": "user", "content": user_message}]
     }
-
     try:
         response = requests.post(MINIMAX_API_URL, headers=headers, json=data, timeout=30)
         result = response.json()
-        logger.info(f"MiniMax Response: {result}")
-
         if "choices" in result:
             return result["choices"][0]["message"]["content"]
-        elif "base_resp" in result:
-            return f"API Error: {result['base_resp'].get('retmsg', 'Unknown')}"
         else:
             return str(result)
     except Exception as e:
-        logger.error(f"Error: {e}")
         return f"Error: {str(e)}"
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
