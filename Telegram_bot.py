@@ -6,7 +6,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-TELEGRAM_TOKEN = "8006638684:AAE9-VE4yh7oyjftfOYWjUAaXbBv-8Bvzgs"
+TELEGRAM_TOKEN =  "8006638684:AAGaUd7joKAd-41O6VVdcYXk2L46CpYjdqA"
 MINIMAX_API_KEY = "sk-api-HIaAqcunFejbtMJNPIvl-TumSpZSlp4-usCZe-Mk6ls-fmEe8b6pJbubotbZOlhzbSppUNhXuSso36Oq-5IRGadX-XNugGxmZ5KCh4rCoww0u88ZCQIsJzA"
 MINIMAX_API_URL = "https://api.minimax.io/v1/text/chatcompletion_v2"
 
