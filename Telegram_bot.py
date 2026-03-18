@@ -8,8 +8,7 @@ logger = logging.getLogger(__name__)
 
 TELEGRAM_TOKEN = "8006638684:AAE9-VE4yh7oyjftfOYWjUAaXbBv-8Bvzgs"
 MINIMAX_API_KEY = "sk-api-HIaAqcunFejbtMJNPIvl-TumSpZSlp4-usCZe-Mk6ls-fmEe8b6pJbubotbZOlhzbSppUNhXuSso36Oq-5IRGadX-XNugGxmZ5KCh4rCoww0u88ZCQIsJzA"
-GROUP_ID = "2034132588238484420"
-MINIMAX_API_URL = f"https://api.minimax.chat/v1/text/chatcompletion_pro?GroupId={GROUP_ID}"
+MINIMAX_API_URL = "https://api.minimax.io/v1/text/chatcompletion_v2"
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
@@ -31,8 +30,10 @@ async def chat_with_minimax(user_message: str) -> str:
     }
 
     data = {
-        "model": "MiniMax-Text-01",
-        "messages": [{"role": "user", "content": user_message}]
+        "model": "M2-her",
+        "messages": [
+            {"role": "user", "content": user_message}
+        ]
     }
 
     try:
